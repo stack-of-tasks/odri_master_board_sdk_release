@@ -12,7 +12,7 @@ set(CXX_DISABLE_WERROR True)
 set(CMAKE_VERBOSE_MAKEFILE True)
 
 # These variables have to be defined before running SETUP_PROJECT
-set(PROJECT_NAME master_board_sdk)
+set(PROJECT_NAME odri_master_board_sdk)
 set(PROJECT_DESCRIPTION
     "This project contains the sdk for the communication between a computer and the master-board"
 )
@@ -26,7 +26,6 @@ if(APPLE)
       OFF
       CACHE BOOL "Build the python binding")
 endif()
-
 
 option(BUILD_PYTHON_INTERFACE "Build the python binding" ON)
 option(PYTHON_STANDARD_LAYOUT "Enable standard Python package layout" ON)
@@ -56,7 +55,6 @@ check_minimal_cxx_standard(11 ENFORCE)
 # ----------------------------------------------------
 # --- DEPENDENCIES -----------------------------------
 # ----------------------------------------------------
-
 
 # Set component to fetch from boost Get the python interface for the bindings
 if(BUILD_PYTHON_INTERFACE)
@@ -89,19 +87,20 @@ set(${PROJECT_NAME}_HEADERS
     "include/${PROJECT_NAME}/motor_driver.h"
     "include/${PROJECT_NAME}/protocol.h")
 
-add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_SOURCES}
-                                   ${${PROJECT_NAME}_HEADERS})
-target_link_libraries(${PROJECT_NAME} pthread)
+set(ODRI_LIBRARY_NAME master_board_sdk)
+add_library(${ODRI_LIBRARY_NAME} SHARED ${${PROJECT_NAME}_SOURCES}
+                                        ${${PROJECT_NAME}_HEADERS})
+target_link_libraries(${ODRI_LIBRARY_NAME} pthread)
 target_include_directories(
-  ${PROJECT_NAME} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-                         $<INSTALL_INTERFACE:include>)
+  ${ODRI_LIBRARY_NAME}
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+         $<INSTALL_INTERFACE:include>)
 install(
-  TARGETS ${PROJECT_NAME}
+  TARGETS ${ODRI_LIBRARY_NAME}
   EXPORT ${TARGETS_EXPORT_NAME}
   DESTINATION lib)
 
-install(FILES package.xml
-  DESTINATION share/${PROJECT_NAME})
+install(FILES package.xml DESTINATION share/${PROJECT_NAME})
 # --- BINDINGS -----------------------------------------------------------------
 
 if(BUILD_PYTHON_INTERFACE)
@@ -114,7 +113,7 @@ if(BUILD_PYTHON_INTERFACE)
   set(${PYWRAP}_INSTALL_DIR ${PYTHON_SITELIB})
   add_library(${PYWRAP} SHARED ${${PYWRAP}_SOURCES} ${${PYWRAP}_HEADERS})
   target_include_directories(${PYWRAP} SYSTEM PRIVATE ${PYTHON_INCLUDE_DIR})
-  target_link_libraries(${PYWRAP} ${PROJECT_NAME})
+  target_link_libraries(${PYWRAP} ${ODRI_LIBRARY_NAME})
   target_link_boost_python(${PYWRAP})
   get_relative_rpath(${${PYWRAP}_INSTALL_DIR} ${PYWRAP}_INSTALL_RPATH)
   set_target_properties(${PYWRAP} PROPERTIES INSTALL_RPATH
@@ -134,20 +133,21 @@ endif(BUILD_PYTHON_INTERFACE)
 
 # --- CHECK EXAMPLES -----------------------------------------------------------
 add_executable(master_board_example example/example.cpp)
-target_link_libraries(master_board_example ${PROJECT_NAME})
-set_target_properties(master_board_example PROPERTIES
-  INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+target_link_libraries(master_board_example ${ODRI_LIBRARY_NAME})
+set_target_properties(master_board_example
+                      PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 install(TARGETS master_board_example DESTINATION bin)
 
 add_executable(master_board_example_pd example/example_pd.cpp)
-target_link_libraries(master_board_example_pd ${PROJECT_NAME})
-set_target_properties(master_board_example_pd PROPERTIES
-  INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+target_link_libraries(master_board_example_pd ${ODRI_LIBRARY_NAME})
+set_target_properties(master_board_example_pd
+                      PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 install(TARGETS master_board_example_pd DESTINATION bin)
 
 add_executable(master_board_example_imu_data_collection
                example/example_imu_data_collection.cpp)
-target_link_libraries(master_board_example_imu_data_collection ${PROJECT_NAME})
+target_link_libraries(master_board_example_imu_data_collection
+                      ${ODRI_LIBRARY_NAME})
 install(TARGETS master_board_example_imu_data_collection DESTINATION bin)
 
 # --- UNIT TESTS -----------------------------------------------------------
