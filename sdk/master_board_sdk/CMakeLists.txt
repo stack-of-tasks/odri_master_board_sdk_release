@@ -74,20 +74,21 @@ if(NOT APPLE)
   list(APPEND ${PROJECT_NAME}_SOURCES src/ESPNOW_manager.cpp
        src/ESPNOW_types.cpp)
 endif(NOT APPLE)
-set(${PROJECT_NAME}_HEADERS
-    "include/${PROJECT_NAME}/defines.h"
-    "include/${PROJECT_NAME}/ESPNOW_manager.h"
-    "include/${PROJECT_NAME}/ESPNOW_types.h"
-    "include/${PROJECT_NAME}/ETHERNET_manager.h"
-    "include/${PROJECT_NAME}/ETHERNET_types.h"
-    "include/${PROJECT_NAME}/Link_manager.h"
-    "include/${PROJECT_NAME}/Link_types.h"
-    "include/${PROJECT_NAME}/master_board_interface.h"
-    "include/${PROJECT_NAME}/motor.h"
-    "include/${PROJECT_NAME}/motor_driver.h"
-    "include/${PROJECT_NAME}/protocol.h")
-
 set(ODRI_LIBRARY_NAME master_board_sdk)
+
+set(${PROJECT_NAME}_HEADERS
+    "include/${ODRI_LIBRARY_NAME}/defines.h"
+    "include/${ODRI_LIBRARY_NAME}/ESPNOW_manager.h"
+    "include/${ODRI_LIBRARY_NAME}/ESPNOW_types.h"
+    "include/${ODRI_LIBRARY_NAME}/ETHERNET_manager.h"
+    "include/${ODRI_LIBRARY_NAME}/ETHERNET_types.h"
+    "include/${ODRI_LIBRARY_NAME}/Link_manager.h"
+    "include/${ODRI_LIBRARY_NAME}/Link_types.h"
+    "include/${ODRI_LIBRARY_NAME}/master_board_interface.h"
+    "include/${ODRI_LIBRARY_NAME}/motor.h"
+    "include/${ODRI_LIBRARY_NAME}/motor_driver.h"
+    "include/${ODRI_LIBRARY_NAME}/protocol.h")
+
 
 add_library(${ODRI_LIBRARY_NAME} SHARED ${${PROJECT_NAME}_SOURCES}
                                         ${${PROJECT_NAME}_HEADERS})
