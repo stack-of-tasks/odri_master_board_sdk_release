@@ -88,6 +88,7 @@ set(${PROJECT_NAME}_HEADERS
     "include/${PROJECT_NAME}/protocol.h")
 
 set(ODRI_LIBRARY_NAME master_board_sdk)
+
 add_library(${ODRI_LIBRARY_NAME} SHARED ${${PROJECT_NAME}_SOURCES}
                                         ${${PROJECT_NAME}_HEADERS})
 target_link_libraries(${ODRI_LIBRARY_NAME} pthread)
