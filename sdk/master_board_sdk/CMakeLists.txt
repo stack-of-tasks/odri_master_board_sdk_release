@@ -89,7 +89,6 @@ set(${PROJECT_NAME}_HEADERS
     "include/${ODRI_LIBRARY_NAME}/motor_driver.h"
     "include/${ODRI_LIBRARY_NAME}/protocol.h")
 
-
 add_library(${ODRI_LIBRARY_NAME} SHARED ${${PROJECT_NAME}_SOURCES}
                                         ${${PROJECT_NAME}_HEADERS})
 target_link_libraries(${ODRI_LIBRARY_NAME} pthread)
