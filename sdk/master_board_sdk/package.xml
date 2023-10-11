@@ -1,12 +1,14 @@
 <?xml version="1.0"?>
 <package format="3">
-    <name>master_board_sdk</name>
+    <name>odri_master_board_sdk</name>
     <version>1.0.6</version>
     <description>
         This project contains the sdk for the communication between a computer
         and the master-board
     </description>
     <maintainer email="mnaveau@tue.mpg.de">Maximilien Naveau</maintainer>
+    <maintainer email="ostasse@laas.fr">Olivier Stasse</maintainer>
+    <maintainer email="gsaurel@laas.fr">Guilhem Saurel</maintainer>
     <license>BSD 3-Clause</license>
 
     <buildtool_depend>cmake</buildtool_depend>
