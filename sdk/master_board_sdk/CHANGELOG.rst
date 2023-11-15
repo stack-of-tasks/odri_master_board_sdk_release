@@ -2,8 +2,8 @@
 Changelog for package odri_master_board_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.6 (2023-11-15)
+------------------
 * Makes cmake-format happy !
 * [CMakeList.txt] Fix CMakeLists.txt to install the header.
 * Add cmake-format.
