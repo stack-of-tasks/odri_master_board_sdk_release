@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <math.h>
 #include <stdio.h>
+#include <stdexcept>
 #include <sys/stat.h>
 
 #include "master_board_sdk/master_board_interface.h"
