@@ -110,6 +110,7 @@ if(BUILD_PYTHON_INTERFACE)
   set(${PYWRAP}_INSTALL_DIR ${PYTHON_SITELIB})
   add_library(${PYWRAP} SHARED ${${PYWRAP}_SOURCES} ${${PYWRAP}_HEADERS})
   target_include_directories(${PYWRAP} SYSTEM PRIVATE ${PYTHON_INCLUDE_DIR})
+
   set_target_properties(${PYWRAP} PROPERTIES SUFFIX ${PYTHON_EXT_SUFFIX})
   target_link_libraries(${PYWRAP} PUBLIC ${ODRI_LIBRARY_NAME})
   target_link_boost_python(${PYWRAP} PUBLIC)
@@ -148,7 +149,7 @@ install(TARGETS master_board_example_pd DESTINATION bin)
 add_executable(master_board_example_imu_data_collection
                example/example_imu_data_collection.cpp)
 target_link_libraries(master_board_example_imu_data_collection
-		      PRIVATE ${ODRI_LIBRARY_NAME})
+                      PRIVATE ${ODRI_LIBRARY_NAME})
 install(TARGETS master_board_example_imu_data_collection DESTINATION bin)
 
 # --- UNIT TESTS -----------------------------------------------------------
