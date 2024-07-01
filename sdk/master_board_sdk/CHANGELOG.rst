@@ -2,6 +2,13 @@
 Changelog for package odri_master_board_sdk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.0.7 (2024-06-24)
+------------------
+* Fix header to have the package working on Noble (@olivier-stasse)
+* Fix building Python bindings on Mac (@ManifoldFR)
+* Remove fetching Catch2 v3 and detect automatically the installed version. (@olivier-stasse)
+* Add Rolling github action (@olivier-stasse)
+  
 1.0.6 (2023-11-15)
 ------------------
 * Makes cmake-format happy !
